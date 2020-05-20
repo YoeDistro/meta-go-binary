@@ -29,11 +29,13 @@ do_install () {
     cp --preserve=mode,timestamps -R ${S}/${ARCH}/go/* ${D}${root_prefix}
 }
 
+SYSROOT_DIRS_NATIVE += "/"
+INHIBIT_SYSROOT_STRIP = "1"
+
 INSANE_SKIP_${PN} += "already-stripped"
 BBCLASSEXTEND = "native nativesdk"
 
 COMPATIBLE_HOST_class-target = "null"
-
 
 PROVIDES_class-native = "go-native"
 PROVIDES_class-nativesdk = "virtual/${TARGET_PREFIX}go-crosssdk virtual/${TARGET_PREFIX}go-runtime"
