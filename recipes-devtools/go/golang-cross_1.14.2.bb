@@ -16,4 +16,28 @@ CC = "${@d.getVar('BUILD_CC').strip()}"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
-do_install[noexec] = "1"
+
+make_wrapper() {
+        rm -f ${D}${bindir}/$2
+        mkdir -p ${D}${bindir}
+        cat <<END >${D}${bindir}/$2
+#!/bin/bash
+here=\`dirname \$0\`
+export GOARCH="${TARGET_GOARCH}"
+export CGO_ENABLED="0"
+#unset GOROOT
+export GOOS="${TARGET_GOOS}"
+export GOARM="\${GOARM:-${TARGET_GOARM}}"
+export GO386="\${GO386:-${TARGET_GO386}}"
+export GOMIPS="\${GOMIPS:-${TARGET_GOMIPS}}"
+\$here/../../../bin/$1 "\$@"
+END
+        chmod +x ${D}${bindir}/$2
+}
+
+do_install() {
+    for f in go gofmt
+    do
+        make_wrapper $f ${TARGET_PREFIX}$f
+    done
+}
