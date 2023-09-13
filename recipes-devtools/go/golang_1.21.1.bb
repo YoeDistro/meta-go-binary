@@ -15,8 +15,8 @@ ARCH_aarch64 = "arm64"
 SRC_URI = "https://dl.google.com/go/go${PV}.linux-amd64.tar.gz;name=amd64;subdir=amd64 \
            https://dl.google.com/go/go${PV}.linux-arm64.tar.gz;name=arm64;subdir=arm64 \
           "
-SRC_URI[amd64.sha256sum] = "acc512fbab4f716a8f97a8b3fbaa9ddd39606a28be6c2515ef7c6c6311acffde"
-SRC_URI[arm64.sha256sum] = "49960821948b9c6b14041430890eccee58c76b52e2dbaafce971c3c38d43df9f"
+SRC_URI[amd64.sha256sum] = "b3075ae1ce5dab85f89bc7905d1632de23ca196bd8336afd93fa97434cfa55ae"
+SRC_URI[arm64.sha256sum] = "7da1a3936a928fd0b2602ed4f3ef535b8cd1990f1503b8d3e1acc0fa0759c967"
 
 inherit bin_package
 
